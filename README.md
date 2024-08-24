@@ -5,7 +5,7 @@
 - Carpeta con proyecto PHP + Laravel 11
 - Estilos con HTML + CSS + Boostrap
 
-### Sprint 1
+## Sprint 1
 
 - Descargamos y revisamos material de AVACO
 - Se recibió clase magistral y guía profesional
