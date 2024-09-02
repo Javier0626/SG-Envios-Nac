@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('estado');
             $table->timestamps();
             // Definir las claves foráneas
-            $table->foreign('id_cliente')->references('id')->on('clientes')->onDelete('cascade');
+            $table->foreign('id_cliente')->references('id')->on('usuarios')->onDelete('cascade');
             $table->foreign('id_envio')->references('id')->on('envios')->onDelete('cascade');
-        });      
+        });
     }
 
     /**
