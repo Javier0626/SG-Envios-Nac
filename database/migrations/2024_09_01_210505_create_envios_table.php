@@ -22,13 +22,9 @@ return new class extends Migration
             $table->string('volumen');
             $table->string('costo');
             $table->longText('descripcion');
-            $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('envios');

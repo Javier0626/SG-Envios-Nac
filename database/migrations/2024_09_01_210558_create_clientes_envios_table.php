@@ -12,20 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('clientes_envios', function (Blueprint $table) {
-            $table->increments('id');
-            $table->bigInteger('id_cliente')->unsigned();
-            $table->bigInteger('id_envio')->unsigned();
+            $table->id();
+            // Definir las claves foráneas
+            $table->foreignId('id_cliente')->references('id')->on('usuarios')->onDelete('cascade');
+            $table->foreignId('id_envio')->references('id')->on('envios')->onDelete('cascade');
             $table->string('estado');
             $table->timestamps();
-            // Definir las claves foráneas
-            $table->foreign('id_cliente')->references('id')->on('usuarios')->onDelete('cascade');
-            $table->foreign('id_envio')->references('id')->on('envios')->onDelete('cascade');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('clientes_envios');
