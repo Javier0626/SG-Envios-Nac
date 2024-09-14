@@ -13,13 +13,10 @@ return new class extends Migration
     {
         Schema::create('clientes_envios', function (Blueprint $table) {
             $table->increments('id');
-            $table->bigInteger('id_cliente')->unsigned();
-            $table->bigInteger('id_envio')->unsigned();
+            $table->foreignId('id_cliente')->references('id')->on('usuarios')->onDelete('cascade');;
+            $table->foreignId('id_envio')->references('id')->on('envios')->onDelete('cascade');
             $table->string('estado');
             $table->timestamps();
-            // Definir las claves foráneas
-            $table->foreign('id_cliente')->references('id')->on('clientes')->onDelete('cascade');
-            $table->foreign('id_envio')->references('id')->on('envios')->onDelete('cascade');
         });      
     }
 
