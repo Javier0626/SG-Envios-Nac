@@ -20,6 +20,24 @@
 - Diseño de modelos
 - Migraciones
 - Creación de views (ejemplos)
+
+## Sprint 3
+
+- Desarrollo de la Gestión de Clientes
+- Desarrollo del CRUD de Clientes: registro, actualización, eliminación y visualización de clientes
+- Interfaz de usuario: Creacion de formularios y vistas para la gestión de clientes
+- Se escribieron pruebas unitarias para clientes
+- Se creo una interfaz inicial para el sistema (landing page, login, registro)
+
+
+## Sprint 4
+
+- Desarrollo de la Gestión de Empleados
+- Desarrollo del CRUD de Empleados: registro, actualización, eliminación y visualización de empleados.
+- Interfaz de usuario: Creacion formularios y vistas para la gestión de empleados.
+- Se escribieron pruebas unitarias para empleados
+- Se agrego una plantilla de Dashboard ADMINLTE
+
 -------------------------------
 
 ## Licencia
