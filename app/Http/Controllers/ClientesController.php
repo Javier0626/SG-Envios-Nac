@@ -9,7 +9,7 @@ class ClientesController extends Controller
 {
     public function index()
     {
-       $clientes = Usuarios::all();
+       $clientes = Usuarios::where('id_rol', 3)->get();
         
        return view('clientes.index', compact('clientes'));
     }
