@@ -27,7 +27,7 @@ class ClientesController extends Controller
             'correo' => 'required|string|email|max:255',
             'telefono' => 'required|string|max:255',
             'direccion' => 'required|string|max:255',
-            'password' => 'required|string|max:255',
+            'password' => 'required|string|max:255|min:6',
             'id_rol' => 'required|integer'
         ]);
 
