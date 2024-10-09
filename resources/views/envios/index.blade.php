@@ -1,5 +1,7 @@
 @extends('adminlte::page')
 
+@section('title', 'Envios')
+
 @section('content_header')
 <div class="flex justify-center items-center text-center">
     <div class="py-6">
@@ -7,7 +9,7 @@
             <h1>Envios</h1>
         </div>
     </div>
-    <!-- <a href="{{ route('usuarios.create') }}" class="text-white bg-blue-500 hover:bg-blue-700 px-4 py-2 rounded-full">CREAR NUEVO USUARIO</a> -->
+    <a href="{{ route('envios.create') }}" class="text-white bg-blue-500 hover:bg-blue-700 px-4 py-2 rounded-full">CREAR NUEVO ENVIO</a>
 </div>
 @stop
 
@@ -38,48 +40,77 @@
                     {{ session('success') }}
                 </div>
                 @endif
-
-                <table class="table-auto w-full">
-                    <thead>
-                        <tr>
-                            <!-- <th class="px-4 py-2 text-gray-900 dark:text-white text-center">ID</th> -->
-                            <th class="px-4 py-2 text-gray-900 dark:text-white text-center">ORIGEN</th>
-                            <th class="px-4 py-2 text-gray-900 dark:text-white text-center">DESTINATARIO</th>
-                            <th class="px-4 py-2 text-gray-900 dark:text-white text-center">PESO</th>
-                            <th class="px-4 py-2 text-gray-900 dark:text-white text-center">ALTO</th>
-                            <th class="px-4 py-2 text-gray-900 dark:text-white text-center">ANCHO</th>
-                            <th class="px-4 py-2 text-gray-900 dark:text-white text-center">PROFUNDIDAD</th>
-                            <th class="px-4 py-2 text-gray-900 dark:text-white text-center">VOLUMEN</th>
-                            <th class="px-4 py-2 text-gray-900 dark:text-white text-center">COSTO</th>
-                            <th class="px-4 py-2 text-gray-900 dark:text-white text-center">DESCRIPCION</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($envios as $envio)
-                        <tr>
-                            <!-- <td class="border px-4 py-2 text-gray-900 dark:text-white text-center">{{ $envio->id }}</td> -->
-                            <td class="border px-4 py-2 text-gray-900 dark:text-white text-center">{{ $envio->origen }}</td>
-                            <td class="border px-4 py-2 text-gray-900 dark:text-white text-center">{{ $envio->destinatario }}</td>
-                            <td class="border px-4 py-2 text-gray-900 dark:text-white text-center">{{ $envio->peso }}</td>
-                            <td class="border px-4 py-2 text-gray-900 dark:text-white text-center">{{ $envio->alto }}</td>
-                            <td class="border px-4 py-2 text-gray-900 dark:text-white text-center">{{ $envio->ancho }}</td>
-                            <td class="border px-4 py-2 text-gray-900 dark:text-white text-center">{{ $envio->profundidad }}</td>
-                            <td class="border px-4 py-2 text-gray-900 dark:text-white text-center">{{ $envio->volumen }}</td>
-                            <td class="border px-4 py-2 text-gray-900 dark:text-white text-center">{{ $envio->costo }}</td>
-                            <td class="border px-4 py-2 text-gray-900 dark:text-white text-center">{{ $envio->descripcion }}</td>
-
-                            <td class="border px-4 py-2 text-gray-900 dark:text-white text-center">
-                                <a href="{{ route('envios.edit', $envio, $envio->rol_id) }}" class="text-blue-600 hover:text-blue-900">Editar</a>
-                                <form action="{{ route('envios.destroy', $envio->id) }}" method="POST" class="inline-block">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="text-red-600 hover:text-red-900">Eliminar</button>
-                                </form>
-                            </td>
-                        </tr>
+                
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
                         @endforeach
-                    </tbody>
-                </table>
+                    </ul>
+                </div>
+                @endif
+                <div class="overflow-x-auto">
+
+                <div class="flex justify-between items-center mb-8">
+                    <div class="flex justify-start">
+                        <a href="{{ route('envios.export-excel') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                            Exportar Excel
+                        </a>
+                    </div>
+                    <div class="flex justify-end">
+                        <a href="{{ route('envios.export-pdf') }}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                            Exportar PDF
+                        </a>
+                    </div>
+                </div>
+
+                    <table class="table-auto w-full">
+                        <thead>
+                            <tr>
+                                <!-- <th class="px-4 py-2 text-gray-900 dark:text-white text-center">ID</th> -->
+                                <th class="px-4 py-2 text-gray-900 dark:text-white text-center">ORIGEN</th>
+                                <th class="px-4 py-2 text-gray-900 dark:text-white text-center">DESTINATARIO</th>
+                                <th class="px-4 py-2 text-gray-900 dark:text-white text-center">PESO</th>
+                                <th class="px-4 py-2 text-gray-900 dark:text-white text-center">ALTO</th>
+                                <th class="px-4 py-2 text-gray-900 dark:text-white text-center">ANCHO</th>
+                                <th class="px-4 py-2 text-gray-900 dark:text-white text-center">PROFUNDIDAD</th>
+                                <th class="px-4 py-2 text-gray-900 dark:text-white text-center">VOLUMEN</th>
+                                <th class="px-4 py-2 text-gray-900 dark:text-white text-center">COSTO</th>
+                                <th class="px-4 py-2 text-gray-900 dark:text-white text-center">DESCRIPCION</th>
+                                <th class="px-4 py-2 text-gray-900 dark:text-white text-center">ACCIONES</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($envios as $envio)
+                            <tr>
+                                <!-- <td class="border px-4 py-2 text-gray-900 dark:text-white text-center">{{ $envio->id }}</td> -->
+                                <td class="border px-4 py-2 text-gray-900 dark:text-white text-center">{{ $envio->origen }}</td>
+                                <td class="border px-4 py-2 text-gray-900 dark:text-white text-center">{{ $envio->destinatario }}</td>
+                                <td class="border px-4 py-2 text-gray-900 dark:text-white text-center">{{ $envio->peso }}</td>
+                                <td class="border px-4 py-2 text-gray-900 dark:text-white text-center">{{ $envio->alto }}</td>
+                                <td class="border px-4 py-2 text-gray-900 dark:text-white text-center">{{ $envio->ancho }}</td>
+                                <td class="border px-4 py-2 text-gray-900 dark:text-white text-center">{{ $envio->profundidad }}</td>
+                                <td class="border px-4 py-2 text-gray-900 dark:text-white text-center">{{ $envio->volumen }}</td>
+                                <td class="border px-4 py-2 text-gray-900 dark:text-white text-center">{{ $envio->costo }}</td>
+                                <td class="border px-4 py-2 text-gray-900 dark:text-white text-center">{{ $envio->descripcion }}</td>
+
+                                <td class="border px-4 py-2 text-gray-900 dark:text-white text-center">
+                                    <div class="flex justify-center space-x-2">
+                                        <a href="{{ route('envios.show', $envio->id) }}" class="text-yellow-600 hover:text-blue-900">Ver</a>
+                                        <a href="{{ route('envios.edit', $envio->id) }}" class="text-blue-600 hover:text-blue-900">Editar</a>
+                                        <form action="{{ route('envios.destroy', $envio->id) }}" method="POST" class="inline-block">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="text-red-600 hover:text-red-900">Eliminar</button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

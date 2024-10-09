@@ -30,7 +30,6 @@ class EmpleadosTest extends TestCase
 
         // Asegurarse de que la respuesta sea exitosa y que la vista tenga los datos de empleados
         $response->assertStatus(200);
-        //$response->assertSessionHas('success', 'Empleados visualizados exitosamente.');
         $response->assertViewHas('empleados');
     }
 

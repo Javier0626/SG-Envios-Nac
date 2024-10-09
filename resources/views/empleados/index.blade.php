@@ -1,5 +1,7 @@
 @extends('adminlte::page')
 
+@section('title', 'Empleados')
+
 @section('content_header')
 <div class="flex justify-center items-center text-center">
     <div class="py-6">
@@ -42,6 +44,15 @@
                 </div>
                 @endif
 
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
                 <table class="table-auto w-full">
                     <thead>
                         <tr>
@@ -66,11 +77,15 @@
 
                             <td class="border px-4 py-2 text-gray-900 dark:text-white text-center">
                                 <a href="{{ route('empleados.edit', $empleado) }}" class="text-blue-600 hover:text-blue-900">Editar</a>
+                                @if(Auth::check())
+                                @if(Auth::user()->esAdmin())
                                 <form action="{{ route('empleados.destroy', $empleado->id) }}" method="POST" class="inline-block">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="text-red-600 hover:text-red-900">Eliminar</button>
                                 </form>
+                                @endif
+                                @endif
                             </td>
                         </tr>
                         @endforeach

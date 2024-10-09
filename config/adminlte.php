@@ -133,8 +133,8 @@ return [
     |
     */
 
-    'usermenu_enabled' => true,
-    'usermenu_header' => false,
+    'usermenu_enabled' => false,
+    'usermenu_header' => true,
     'usermenu_header_class' => 'bg-primary',
     'usermenu_image' => false,
     'usermenu_desc' => false,
@@ -215,7 +215,7 @@ return [
     */
 
     'sidebar_mini' => 'lg',
-    'sidebar_collapse' => false,
+    'sidebar_collapse' => true,
     'sidebar_collapse_auto_size' => false,
     'sidebar_collapse_remember' => false,
     'sidebar_collapse_remember_no_transition' => true,
@@ -395,17 +395,11 @@ return [
     ], */
     'menu' => [
         // Navbar items:
-        [
+        /* [
             'type' => 'navbar-search',
             'text' => 'search',
             'topnav_right' => true,
-        ],
-        [
-            'text' => 'Cerrar sesión',
-            'url' => 'login',
-            'topnav_right' => true,
-            'icon' => 'fas fa-sign-out-alt',
-        ],
+        ], */
 
         // Sidebar items:
         [
@@ -415,23 +409,27 @@ return [
         ],
         [
             'text' => 'Envíos',
-            'url' => 'envios',
+            'url' => 'dashboard/envios',
             'icon' => 'fas fa-fw fa-shipping-fast',
+            'active' => ['dashboard/envios/*'],
         ],
         [
             'text' => 'Clientes',
-            'url' => 'clientes',
+            'url' => 'dashboard/clientes',
             'icon' => 'fas fa-fw fa-users',
+            'active' => ['dashboard/clientes/*', 'clientes/*'],
         ],
         [
             'text' => 'Empleados',
-            'url' => 'empleados',
+            'url' => 'dashboard/empleados',
             'icon' => 'fas fa-fw fa-briefcase',
+            'active' => ['dashboard/empleados', 'empleados/*'],
         ],
         [
             'text' => 'Usuarios',
-            'url' => 'usuarios',
+            'url' => 'dashboard/usuarios',
             'icon' => 'fas fa-fw fa-user',
+            'active' => ['dashboard/usuarios', 'usuarios/*'],
         ],
     ],
 

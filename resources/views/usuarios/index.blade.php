@@ -1,5 +1,7 @@
 @extends('adminlte::page')
 
+@section('title', 'Usuarios')
+
 @section('content_header')
 <div class="flex justify-center items-center text-center">
 <div class="py-6">
@@ -39,6 +41,16 @@
                 @if (session('success'))
                 <div class="mb-4 p-4 bg-green-100 text-green-800 rounded">
                     {{ session('success') }}
+                </div>
+                @endif
+
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
                 </div>
                 @endif
 
